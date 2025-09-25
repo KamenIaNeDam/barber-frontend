@@ -10,7 +10,7 @@
 <header
   class="flex justify-between items-center absolute w-full top-0 bg-black/50 z-100 p-4"
 >
-  <div class="text-3xl">Barber</div>
+  <div class="text-2xl">Barber</div>
 
   <button class="cursor-pointer" on:click={() => isOpen.set(!$isOpen)}>
     {#if $isOpen}
