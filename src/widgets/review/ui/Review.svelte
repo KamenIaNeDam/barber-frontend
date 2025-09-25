@@ -25,6 +25,7 @@
     });
 </script>
 
+{#if reviews.length > 0}
 <section id="review" class=" w-full py-20 px-5">
     <h2 class="text-center">Отзывы</h2>
     <div class="swiper swiper-review max-w-lg mt-10 bg-white rounded-2xl shadow space-y-4">
@@ -43,6 +44,7 @@
         <div class="swiper-button-next swiper-review-button-next"></div>
     </div>
 </section>
+{/if}
 
 <style>
     .swiper-review-button-prev,

@@ -12,6 +12,11 @@
         const swiper = new Swiper(".swiper", {
             modules: [Navigation, Pagination],
             loop: true,
+            slidesPerView: 1, // default
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 16 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+            },
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -24,19 +29,22 @@
     });
 </script>
 
-<section id="galler" class="w-full pt-20">
-    <h2 class="text-center">Галерея</h2>
-    <div class="swiper w-full h-full mt-10">
-        <div class="swiper-wrapper max-h-screen">
+<section id="galler" class="max-h-screen py-20">
+    <h2 class="text-center">Работы</h2>
+    <div class="swiper  mt-10">
+        <div class="swiper-wrapper h-full">
             {#each gallery as item}
-                <div class="swiper-slide flex justify-center items-center">
+                <div
+                    id="{String(item.id)}"
+                    class="swiper-slide flex justify-center items-center h-full"
+                >
                     <img
-                        class="block sm:hidden max-w-full h-auto mx-auto"
+                        class="block sm:hidden mx-auto. w-full h-full object-contain"
                         src={item.mobileImage}
                         alt={item.title}
                     />
                     <img
-                        class="hidden sm:block max-w-full h-auto mx-auto"
+                        class="hidden sm:block mx-auto w-full h-full object-contain"
                         src={item.desktopImage}
                         alt={item.title}
                     />

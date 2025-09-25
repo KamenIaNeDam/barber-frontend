@@ -11,10 +11,11 @@
 >
     <div></div>
     <div>
-        <h1 class="">Барбершоп<br />В Красноярске</h1>
-        <h2 class="text-gray-500 my-5 !text-sm">
+        <h1 class="!text-4xl">Гётин</h1>
+        <h2>Барбершоп В Красноярске</h2>
+        <h3 class="text-gray-500 my-5 !text-sm">
             Мужские стрижки и уход за бородой на ул. Лесников, 37Б
-        </h2>
+        </h3>
         <Button label="Записаться" onClick={() => console.log("Cliked")} />
     </div>
     <div class="flex gap-4">

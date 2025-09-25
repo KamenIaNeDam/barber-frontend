@@ -50,8 +50,8 @@
 
 <Hero />
 <Service />
-<About />
-<Location />
+<!-- <About /> -->
 <Gallery />
+<Location />
 <Review />
 <Feedback />
