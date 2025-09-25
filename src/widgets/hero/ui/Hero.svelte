@@ -17,7 +17,7 @@
       class=" object-cover opacity-15 mx-auto"
     />
   </div>
-  <div class="absolute h-full w-full hidden  md:flex  justify-end items-center">
+  <div class="absolute h-full w-full hidden md:flex justify-end items-center">
     <img
       alt="background"
       src="/hero-background.webp"
@@ -29,13 +29,14 @@
     class="relative h-full w-full flex justify-between items-center flex-col text-center p-4 z-10"
   >
     <div></div>
-    <div>
-      <h1 class="!text-4xl my-2 font-[HiraMinProNW6]">Гётин</h1>
-      <h2>Барбершоп В Красноярске</h2>
-      <h3 class="text-gray-500 my-5 !text-sm">
-        Мужские стрижки и бритье на ул. Лесников, 27
-      </h3>
-      <Button label="Записаться" onClick={() => console.log("Cliked")} />
+    <div class="flex flex-col gap-4">
+      <h1 class="!text-4xl">Барбершоп «Гётин»</h1>
+      <h2>Мужские стрижки, борода и бритьё</h2>
+      <h3 class="text-gray-500 !text-sm">Красноярск, ул. Лесников, 27</h3>
+      <div>
+
+        <Button label="Записаться" onClick={() => console.log("Clicked")} />
+      </div>
     </div>
     <div class="flex gap-4">
       {#each contacts as contact}

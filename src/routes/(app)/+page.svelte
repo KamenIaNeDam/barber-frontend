@@ -11,40 +11,39 @@
 
 <svelte:head>
   <!-- SEO -->
-  <title>Барбершоп Красноярск | Мужские стрижки и борода — ул. Лесников, 37Б</title>
+  <title>Барбершоп «Гётин» в Красноярске | Мужские стрижки, борода и бритьё</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/jpg" sizes="32x32" href="/favicon.jpg" />
+  <link rel="icon" type="image/jpg" sizes="16x16" href="/favicon.jpg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.jpg" />
+  <link rel="manifest" href="/site.webmanifest" />
   <meta
     name="description"
-    content="Барбершоп в Красноярске (ул. Лесников, 37Б, 660006). Мужские стрижки, уход за бородой, бритьё. Записывайтесь онлайн или звоните!"
+    content="Барбершоп «Гётин» в Красноярске (ул. Лесников, 27). Мужские стрижки, уход за бородой, бритьё. Онлайн-запись и звонки — без ожидания!"
   />
   <meta
     name="keywords"
-    content="барбершоп, стрижка, борода, Красноярск, район, адрес"
+    content="барбершоп Гётин, стрижка Красноярск, барбершоп Красноярск, борода, бритьё, мужские стрижки"
   />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Барбершоп Красноярск — Мужские стрижки и борода" />
+  <meta property="og:title" content="Барбершоп «Гётин» в Красноярске — мужские стрижки, борода и бритьё<" />
   <meta
     property="og:description"
-    content="Барбершоп в Красноярске. Стрижки, уход за бородой и бритьё. Ул. Лесников, 37Б."
+    content="Барбершоп «Гётин» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 37Б."
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://example.com/" />
-  <meta
-    property="og:image"
-    content="/hero-background.webp"
-  />
+  <meta property="og:image" content="/favicon.jpg" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Барбершоп Красноярск — Мужские стрижки и борода" />
+  <meta name="twitter:title" content="Барбершоп «Гётин» в Красноярске — мужские стрижки, борода и бритьё<" />
   <meta
     name="twitter:description"
-    content="Барбершоп в Красноярске. Стрижки, уход за бородой и бритьё. Ул. Лесников, 37Б."
+    content="Барбершоп «Гётин» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 37Б."
   />
-  <meta
-    name="twitter:image"
-    content="/hero-background.webp"
-  />
+  <meta name="twitter:image" content="/favicon.jpg" />
 </svelte:head>
 
 
