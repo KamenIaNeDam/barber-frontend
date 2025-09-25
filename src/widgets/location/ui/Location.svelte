@@ -1,8 +1,9 @@
 <script lang="ts">
     import { PUBLIC_YANDEX_MAPS_API_KEY } from "$env/static/public";
 
-    export let long: number = 92.795115;
-    export let lat: number = 55.980316;
+    // 55.981218, 92.801386
+    export let long: number = 92.801386;
+    export let lat: number = 55.981218;
 
     import { onMount } from "svelte";
 
@@ -64,7 +65,7 @@
         <div class="max-w-lg p-10 flex flex-col gap-4">
             <div>
                 Адрес:<br/>
-                Улица Лесников, 37Б, Красноярск, 660006
+                Улица Лесников, 27, Красноярск, 660006
             </div>
             <div>
                 Телефон:<br/>

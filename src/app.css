@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "@yandex/ymaps3-default-ui-theme/dist/esm/index.css";
 
+@font-face {
+      font-family: 'HiraMinProNW6';
+      src: url('/fonts/Hiragino Mincho ProN W6.otf') format('opentype'); /* Use 'opentype' for OTF */
+      font-weight: normal;
+      font-style: normal;
+    }
+
 :root {
   background-color: black;
   color: white;
@@ -11,6 +18,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: "HiroMinProNW6";
 }
 
 .overflow-hidden {
@@ -26,3 +34,4 @@ h2 {
   font-size: 1.5rem;
   font-weight: 750;
 }
+

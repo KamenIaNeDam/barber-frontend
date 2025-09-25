@@ -8,9 +8,9 @@
 </script>
 
 <header
-  class="flex justify-between items-center absolute w-full top-0 bg-black/50 z-100 p-4"
+  class="flex justify-between items-center absolute w-full top-0 bg-black/50 z-1000 p-4"
 >
-  <div class="text-2xl">Гётин</div>
+  <div class="text-2xl font-[HiraMinProNW6]">Гётин</div>
 
   <button class="cursor-pointer" on:click={() => isOpen.set(!$isOpen)}>
     {#if $isOpen}
@@ -23,7 +23,7 @@
 
 {#if $isOpen}
   <nav
-    class=" z-10 text-2xl absolute h-screen w-full flex justify-between items-center flex-col bg-black overflow-y-auto px-8 py-4"
+    class=" z-900 text-2xl absolute h-screen w-full flex justify-between items-center flex-col bg-black overflow-y-auto px-8 py-4"
   >
     <div class=""></div>
     <div class="flex justify-center items-center flex-col gap-4">

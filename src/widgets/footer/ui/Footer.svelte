@@ -8,7 +8,7 @@
   <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-y-4">
     <!-- Логотип и описание -->
     <div>
-      <h2 class="text-xl font-bold mb-2">Barber</h2>
+      <h2 class="text-xl font-bold mb-2">Гётен</h2>
       <!-- <p class="text-gray-400 text-sm">
         Современное приложение для решения ваших задач. Мы делаем всё просто и удобно.
       </p> -->
@@ -30,8 +30,8 @@
     <div>
       <h3 class="font-semibold mb-2">Контакты</h3>
       <p class="text-gray-400 text-sm">Телефон: +7 123 456-78-90</p>
-      <p class="text-gray-400 text-sm">Адрес: Улица Лесников, 37Б, Красноярск, 660006</p>
-      <p class="text-gray-400 text-sm">Режим работы: Пн-Пт: 10:00-22:00, Сб: 10:00-21:00, Вс: выходной</p>
+      <p class="text-gray-400 text-sm">Адрес: Улица Лесников, 27, Красноярск, 660006</p>
+      <p class="text-gray-400 text-sm">Режим работы: Ежедневно: 10:00-21:00</p>
         <div class="flex gap-4">
       {#each contacts as contact}
         <ContactCard {contact} />
@@ -42,6 +42,6 @@
   </div>
 
   <div class="mt-8 text-center text-gray-500 text-sm">
-    © {new Date().getFullYear()} Barber. Все права защищены.
+    © {new Date().getFullYear()} Гётен. Все права защищены.
   </div>
 </footer>
