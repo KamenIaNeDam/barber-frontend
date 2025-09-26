@@ -35,7 +35,7 @@
     content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 37Б."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:url" content="https://getinbarber.ru/" />
   <meta property="og:image" content="/favicon.jpg" />
 
   <!-- Twitter -->
