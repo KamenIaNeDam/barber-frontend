@@ -2,10 +2,11 @@
   import { menuItems } from "@entities/menu/model/menuItems";
   import BurgerMenuIcon from "@shared/ui/icons/BurgerMenuIcon.svelte";
   import CloseIcon from "@shared/ui/icons/CloseIcon.svelte";
-  import { isOpen } from "@shared/stores/modal";
   import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
-    import { NAME } from "@shared/constants/title";
+  import { NAME } from "@shared/constants/title";
+
+  let isOpen = false;
 </script>
 
 <header
@@ -13,8 +14,8 @@
 >
   <div class="text-2xl font-[HiraMinProNW6]">{NAME}</div>
 
-  <button class="cursor-pointer" on:click={() => isOpen.set(!$isOpen)}>
-    {#if $isOpen}
+  <button class="cursor-pointer" on:click={() => (isOpen = !isOpen)}>
+    {#if isOpen}
       <CloseIcon />
     {:else}
       <BurgerMenuIcon />
@@ -22,7 +23,7 @@
   </button>
 </header>
 
-{#if $isOpen}
+{#if isOpen}
   <nav
     class=" z-900 text-2xl absolute h-screen w-full flex justify-between items-center flex-col bg-black overflow-y-auto px-8 py-4"
   >
