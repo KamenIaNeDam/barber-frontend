@@ -29,7 +29,7 @@
   />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё<" />
+  <meta property="og:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё" />
   <meta
     property="og:description"
     content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 27."
@@ -40,7 +40,7 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё<" />
+  <meta name="twitter:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё" />
   <meta
     name="twitter:description"
     content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 27."
