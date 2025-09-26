@@ -2,6 +2,7 @@
   import Button from "@shared/ui/Button.svelte";
   import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
+  import { NAME } from "@shared/constants/title";
 </script>
 
 <section id="hero" class="h-screen w-full">
@@ -30,12 +31,11 @@
   >
     <div></div>
     <div class="flex flex-col gap-4">
-      <h1 class="!text-4xl">Барбершоп «Гётин»</h1>
+      <h1 class="!text-4xl">Барбершоп «{NAME}»</h1>
       <h2>Мужские стрижки, борода и бритьё</h2>
       <h3 class="text-gray-500 !text-sm">Красноярск, ул. Лесников, 27</h3>
       <div>
-
-        <Button label="Записаться" onClick={() => console.log("Clicked")} />
+          <Button _class="ms_booking" label="Записаться" onClick={() => {}} />
       </div>
     </div>
     <div class="flex gap-4">

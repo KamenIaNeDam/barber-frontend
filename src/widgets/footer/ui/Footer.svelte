@@ -2,13 +2,14 @@
   import { menuItems } from "@entities/menu/model/menuItems";
   import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
+  import { NAME } from "@shared/constants/title";
 </script>
 
 <footer class="py-10 px-5">
   <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-y-4">
     <!-- Логотип и описание -->
     <div>
-      <h2 class="text-xl font-bold mb-2">Гётен</h2>
+      <h2 class="text-xl font-bold mb-2">{NAME}</h2>
       <!-- <p class="text-gray-400 text-sm">
         Современное приложение для решения ваших задач. Мы делаем всё просто и удобно.
       </p> -->
@@ -42,6 +43,6 @@
   </div>
 
   <div class="mt-8 text-center text-gray-500 text-sm">
-    © {new Date().getFullYear()} Гётен. Все права защищены.
+    © {new Date().getFullYear()} {NAME}. Все права защищены.
   </div>
 </footer>

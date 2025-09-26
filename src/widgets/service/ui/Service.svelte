@@ -3,7 +3,10 @@
     import Button from "@shared/ui/Button.svelte";
 </script>
 
-<section id="service" class="hidden sm:block w-full text-black bg-white py-20 px-5">
+<section
+    id="service"
+    class="hidden sm:block w-full text-black bg-white py-20 px-5"
+>
     <h2 class="text-center">Услуги</h2>
     <ul class="pt-10 grid grid-cols-2 gap-x-10 gap-y-4">
         {#each services as service}
@@ -19,16 +22,19 @@
         {/each}
     </ul>
     <div class="w-full grid place-items-center pt-10">
-        <Button
-            _class=""
-            label="Записаться"
-            onClick={() => console.log("Clicked")}
-            variant="secondary"
-        />
+            <Button
+                _class="ms_booking"
+                label="Записаться"
+                onClick={() => console.log("Clicked")}
+                variant="secondary"
+            />
     </div>
 </section>
 
-<section id="service"  class="block sm:hidden w-full text-black bg-white py-20 px-5">
+<section
+    id="service"
+    class="block sm:hidden w-full text-black bg-white py-20 px-5"
+>
     <h2 class="text-center">Услуги</h2>
     <ul class="pt-10 grid grid-cols-1 gap-x-10 gap-y-4">
         {#each services as service}
@@ -44,11 +50,11 @@
         {/each}
     </ul>
     <div class="w-full grid place-items-center pt-10">
-        <Button
-            _class=""
-            label="Записаться"
-            onClick={() => console.log("Clicked")}
-            variant="secondary"
-        />
+            <Button
+                _class="ms_booking"
+                label="Записаться"
+                onClick={() => console.log("Clicked")}
+                variant="secondary"
+            />
     </div>
 </section>

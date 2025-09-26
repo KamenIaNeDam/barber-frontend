@@ -48,6 +48,15 @@
             }),
         );
 
+        const controls = new YMapControls({ position: "right" });
+        controls.addChild(
+            new YMapDefaultUI.YMapZoomControl({
+                easing: "linear",
+            }),
+        );
+        controls.addChild(new YMapDefaultUI.YMapGeolocationControl());
+
+        map.addChild(controls);
     });
 </script>
 
@@ -59,20 +68,24 @@
 </svelte:head>
 
 <section id="contacts" class="w-full text-black bg-white">
-    <img alt="compas" src="/compas.png" class="absolute w-[40%] right-0 object-cover opacity-25" />
+    <img
+        alt="compas"
+        src="/compas.png"
+        class="absolute w-[40%] right-0 object-cover opacity-25"
+    />
     <div class="relative z-10">
         <h2 class="text-center pt-20">Контакты</h2>
         <div class="max-w-lg p-10 flex flex-col gap-4">
             <div>
-                Адрес:<br/>
+                Адрес:<br />
                 Улица Лесников, 27, Красноярск, 660006
             </div>
             <div>
-                Телефон:<br/>
+                Телефон:<br />
                 <a href="tel:+7 (999) 999-99-99"> +7 (999) 999-99-99 </a>
             </div>
             <div>
-                Режим работы: <br/>
+                Режим работы: <br />
                 Ежедневно: 10:00-21:00
             </div>
         </div>

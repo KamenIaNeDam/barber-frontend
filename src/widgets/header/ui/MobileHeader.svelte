@@ -5,12 +5,13 @@
   import { isOpen } from "@shared/stores/modal";
   import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
+    import { NAME } from "@shared/constants/title";
 </script>
 
 <header
   class="flex justify-between items-center absolute w-full top-0 bg-black/50 z-1000 p-4"
 >
-  <div class="text-2xl font-[HiraMinProNW6]">Гётин</div>
+  <div class="text-2xl font-[HiraMinProNW6]">{NAME}</div>
 
   <button class="cursor-pointer" on:click={() => isOpen.set(!$isOpen)}>
     {#if $isOpen}
