@@ -32,7 +32,7 @@
   <meta property="og:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё<" />
   <meta
     property="og:description"
-    content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 37Б."
+    content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 27."
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://getinbarber.ru/" />
@@ -43,7 +43,7 @@
   <meta name="twitter:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё<" />
   <meta
     name="twitter:description"
-    content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 37Б."
+    content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 27."
   />
   <meta name="twitter:image" content="/favicon.jpg" />
 </svelte:head>
