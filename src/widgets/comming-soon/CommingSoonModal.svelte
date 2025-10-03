@@ -15,8 +15,3 @@
     {/each}
   </div>
 </div>
-
-<!-- <h2>Login</h2>
-<input placeholder="email" />
-<input type="password" placeholder="password" />
-<button on:click={handleLogin}>Login</button> -->

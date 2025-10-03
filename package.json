@@ -26,6 +26,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "@yandex/ymaps3-default-ui-theme": "^0.0.19",
+    "svelte-toast": "^1.0.0",
     "swiper": "^12.0.2",
     "tailwindcss": "^4.1.13"
   }

@@ -1,22 +1,21 @@
 <script lang="ts">
-  import { fly } from 'svelte/transition';
-  import { onDestroy } from 'svelte';
-    import { modalStore, closeModal } from '@shared/stores/modal';
-    import CloseIcon from '../icons/CloseIcon.svelte';
+  import { fly } from "svelte/transition";
+  import { onDestroy } from "svelte";
+  import { modalStore, closeModal } from "@shared/stores/modal";
+  import CloseIcon from "../icons/CloseIcon.svelte";
 
   let modal: { isOpen: boolean; content: any | null };
-  const unsubscribe = modalStore.subscribe(v => {
+  const unsubscribe = modalStore.subscribe((v) => {
     modal = v;
-    if (typeof document !== 'undefined') {
+    if (typeof document !== "undefined") {
       if (v.isOpen) {
-        document.body.classList.add('overflow-hidden');
+        document.body.classList.add("overflow-hidden");
       } else {
-        document.body.classList.remove('overflow-hidden');
+        document.body.classList.remove("overflow-hidden");
       }
     }
   });
   onDestroy(unsubscribe);
-
 </script>
 
 {#if modal.isOpen && modal.content}
@@ -38,11 +37,11 @@
         class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
         on:click={closeModal}
       >
-        <CloseIcon width=24 height=24/>
+        <CloseIcon width="24" height="24" />
       </button>
 
       <!-- Modal content -->
-      <svelte:component this={modal.content}/>
+      <svelte:component this={modal.content} />
     </div>
   </div>
 {/if}
