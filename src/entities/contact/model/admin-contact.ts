@@ -1,5 +1,3 @@
-import type { ContactType } from "./contact";
-
 export interface AdminContactModel {
     id: number;
     title: string;

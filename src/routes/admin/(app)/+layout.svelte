@@ -6,13 +6,11 @@
     export let data;
 
     onMount(() => {
-        tokenStore.set(data.accessToken)
-    })
-
-
+        tokenStore.set(data.accessToken);
+    });
 </script>
-<div class="bg-gray-100 text-black min-h-screen">
-<Header user={data.user} />
-<slot />
-</div>
 
+<div class="bg-gray-100 text-black min-h-screen">
+    <Header user={data.user} />
+    <slot />
+</div>
