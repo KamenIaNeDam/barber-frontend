@@ -3,6 +3,7 @@
     import Seo from "@features/admin-seo/ui/Seo.svelte";
     import AdminContacts from "@widgets/admin-contact/ui/AdminContacts.svelte";
     import AdminServices from "@widgets/admin-service/ui/AdminServices.svelte";
+    import AdminSocialMedias from "@widgets/admin-social-media/ui/AdminSocialMedias.svelte";
     export let data;
 </script>
 <div class = 'px-5'>
@@ -13,5 +14,7 @@
     <AdminMap location={data.location}/>
 
     <AdminServices services = {data.services} />
+
+    <AdminSocialMedias contacts = {data.socialMedias}/>
 </div>
 
