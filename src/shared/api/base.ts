@@ -5,7 +5,7 @@ export async function api<T>(
     url: string,
     options: RequestInit = {},
     token?: string,
-): Promise<T> {
+): Promise<T>{
     const res = await fetchFn(PUBLIC_API + url, {
         ...options,
         headers: {
@@ -18,6 +18,8 @@ export async function api<T>(
     if (!res.ok) {
         throw new Error(await res.text());
     }
-
+    if (res.status === 204){
+        return undefined as unknown as T;
+    }
     return res.json() as Promise<T>;
 }

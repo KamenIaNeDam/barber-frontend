@@ -14,6 +14,7 @@
 </script>
 
 <div class="py-5">
+    <h2 class="my-5">SEO</h2>
     <form on:blur={handelSubmit}>
         <div class="mb-4">
             <label class="block mb-1" for="title">SEO заголовок</label>

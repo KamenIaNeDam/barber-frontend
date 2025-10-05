@@ -15,7 +15,10 @@
 
 <div class="flex justify-between p-4 items-center">
     <div>
-        {user.id} | {user.email}
+        <a href="/admin">
+
+            {user.id} | {user.email}
+        </a>
     </div>
     <div>
         <Button onClick={handleOnLogout} type="button" label="Выйти" variant="secondary"/>

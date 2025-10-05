@@ -11,7 +11,7 @@
 
 
 </script>
-<div class="bg-gray-100 text-black">
+<div class="bg-gray-100 text-black min-h-screen">
 <Header user={data.user} />
 <slot />
 </div>
