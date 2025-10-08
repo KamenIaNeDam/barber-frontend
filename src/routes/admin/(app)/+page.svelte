@@ -2,6 +2,7 @@
     import AdminMap from "@features/admin-map/ui/AdminMap.svelte";
     import Seo from "@features/admin-seo/ui/Seo.svelte";
     import AdminContacts from "@widgets/admin-contact/ui/AdminContacts.svelte";
+    import AdminGalleries from "@widgets/admin-gallery/ui/AdminGalleries.svelte";
     import AdminServices from "@widgets/admin-service/ui/AdminServices.svelte";
     import AdminSocialMedias from "@widgets/admin-social-media/ui/AdminSocialMedias.svelte";
     export let data;
@@ -16,5 +17,7 @@
     <AdminServices services = {data.services} />
 
     <AdminSocialMedias contacts = {data.socialMedias}/>
+
+    <AdminGalleries gallery = {data.gallery} />
 </div>
 

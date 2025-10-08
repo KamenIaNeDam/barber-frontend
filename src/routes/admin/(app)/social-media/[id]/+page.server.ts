@@ -19,5 +19,4 @@ export async function load({ fetch,cookies, params }) {
         return error(404, "Media not found")
 
     }
-
 }
