@@ -1,0 +1,30 @@
+services:
+  barber-front:
+    container_name: barber-front
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # target: ${DOCKER_TARGET:-development}
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/app/src
+    env_file: .env
+    networks:
+      - barber-net
+    profiles: ["dev"]
+
+  barber-front-prod:
+    container_name: barber-front-prod
+    image: registry.gitlab.com/barber2834539/frontend
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    networks:
+      - barber-net
+    profiles: ["prod"]
+
+networks:
+  barber-net:
+    external: true
