@@ -11,6 +11,7 @@
     import type { ImageModel } from "@entities/image/model";
 
     export let gallery: AdminGalleryModel | undefined = undefined;
+    let loadingState = false
 
     let payload: AdminGalleryCreateModel = {
         image_id: gallery?.image.id || 0,
@@ -90,15 +91,9 @@
     <!-- <h2 class="my-5">Контак</h2> -->
     <form on:submit={handelSubmit}>
         <div class="mb-4">
-            <!-- <label class="block mb-1" for="title">Заголовок</label>
-            <input
-                id="title"
-                name="title"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.image}
-            /> -->
-            <ImageUploader onUpload={(image: ImageModel) => {
+            <ImageUploader setLoading={(item: boolean) => {
+              loadingState=item
+            }} onUpload={(image: ImageModel) => {
                 payload.image_id = image.id
             }}  previewUrl={gallery?.image && `${PUBLIC_API}${gallery.image.url}`}/>
         </div>
@@ -124,9 +119,10 @@
             />
         </div>
         <Button
-            label="{gallery ? 'Сохранить': 'Создать'}"
+            label="{loadingState? "Загрузка":gallery ? 'Сохранить': 'Создать'}"
             onClick={() => {}}
             type="submit"
+            disabled={loadingState}
             variant="secondary"
         />
     </form>
