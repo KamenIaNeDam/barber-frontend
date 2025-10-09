@@ -42,7 +42,7 @@
                     class="swiper-slide flex justify-center items-center h-full"
                 >
                     <img
-                        class="block sm:hidden mx-auto. w-full h-full object-contain"
+                        class="mx-auto. w-full h-full object-contain"
                         src={`${PUBLIC_API}${item.image.url}`}
                         alt="Галерея"
                     />
