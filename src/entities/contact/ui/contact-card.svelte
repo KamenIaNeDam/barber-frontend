@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { ContactModel } from "../model/contact";
+    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
     import { contactIcons } from "./icons";
-    export let contact: ContactModel;
+    export let contact: SocialMediaModel;
 </script>
 
-<a href={contact.url} class="">
+<a  class="" href={contact.url} target="_blank" rel="noopener noreferrer">
      <svelte:component this="{contactIcons[contact.type]}" />
 </a>

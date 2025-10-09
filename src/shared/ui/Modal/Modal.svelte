@@ -4,7 +4,7 @@
   import { modalStore, closeModal } from "@shared/stores/modal";
   import CloseIcon from "../icons/CloseIcon.svelte";
 
-  let modal: { isOpen: boolean; content: any | null };
+  let modal: { isOpen: boolean; content: any | null, props: any | null };
   const unsubscribe = modalStore.subscribe((v) => {
     modal = v;
     if (typeof document !== "undefined") {
@@ -41,7 +41,7 @@
       </button>
 
       <!-- Modal content -->
-      <svelte:component this={modal.content} />
+      <svelte:component this={modal.content} {...modal.props} />
     </div>
   </div>
 {/if}

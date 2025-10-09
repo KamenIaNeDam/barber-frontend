@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { services } from "@entities/service/model/service";
+    import type { ServiceModel } from "@entities/service/model/service";
     import Button from "@shared/ui/Button.svelte";
+    export let services: ServiceModel[] = []
 </script>
 
 <section

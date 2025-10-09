@@ -9,11 +9,14 @@
 
     import { NAME } from "@shared/constants/title";
 
+    export let data
+
+
 </script>
 
 <svelte:head>
   <!-- SEO -->
-  <title>Барбершоп «{NAME}» в Красноярске | Мужские стрижки, борода и бритьё</title>
+  <title>{data.mainPage.seo.title}</title>
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="icon" type="image/jpg" sizes="32x32" href="/favicon.jpg" />
   <link rel="icon" type="image/jpg" sizes="16x16" href="/favicon.jpg" />
@@ -21,18 +24,18 @@
   <link rel="manifest" href="/site.webmanifest" />
   <meta
     name="description"
-    content="Барбершоп «{NAME}» в Красноярске (ул. Лесников, 27). Мужские стрижки, уход за бородой, бритьё. Онлайн-запись и звонки — без ожидания!"
+    content="{data.mainPage.seo.description}"
   />
   <meta
     name="keywords"
-    content="барбершоп {NAME}, стрижка Красноярск, барбершоп Красноярск, борода, бритьё, мужские стрижки"
+    content="{data.mainPage.seo.keywords}"
   />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё" />
+  <meta property="og:title" content="{data.mainPage.seo.title}" />
   <meta
     property="og:description"
-    content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 27."
+    content="{data.mainPage.seo.description}"
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://getinbarber.ru/" />
@@ -40,19 +43,19 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Барбершоп «{NAME}» в Красноярске — мужские стрижки, борода и бритьё" />
+  <meta name="twitter:title" content="{data.mainPage.seo.title}" />
   <meta
     name="twitter:description"
-    content="Барбершоп «{NAME}» в Красноярске. Стрижки, уход за бородой и бритьё. Адрес: ул. Лесников, 27."
+    content="{data.mainPage.seo.description}"
   />
   <meta name="twitter:image" content="/favicon.jpg" />
 </svelte:head>
 
 
-<Hero />
-<Service />
+<Hero contacts={data.mainPage.medias} />
+<Service services={data.mainPage.services}/>
 <!-- <About /> -->
-<Gallery />
-<Location />
-<Review />
+<Gallery gallery={data.mainPage.gallery}/>
+<Location location={data.mainPage.location} contacts={data.mainPage.contacts} />
+<!-- <Review /> -->
 <!-- <Feedback /> -->

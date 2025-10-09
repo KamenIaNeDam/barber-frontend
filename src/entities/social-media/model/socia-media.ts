@@ -5,7 +5,7 @@ export enum MediaType {
   Instagram = "instagram",
 }
 
-export interface ContactModel {
+export interface SocialMediaModel {
   id: number;
   url: string;
   type: MediaType;

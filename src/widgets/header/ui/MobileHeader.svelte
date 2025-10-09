@@ -2,10 +2,11 @@
   import { menuItems } from "@entities/menu/model/menuItems";
   import BurgerMenuIcon from "@shared/ui/icons/BurgerMenuIcon.svelte";
   import CloseIcon from "@shared/ui/icons/CloseIcon.svelte";
-  import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
   import { NAME } from "@shared/constants/title";
+    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
 
+  export let socialMedias: SocialMediaModel[] = []
   let isOpen = false;
 </script>
 
@@ -36,7 +37,7 @@
       {/each}
     </div>
     <div class="flex gap-4">
-      {#each contacts as contact}
+      {#each socialMedias as contact}
         <ContactCard {contact} />
       {/each}
     </div>

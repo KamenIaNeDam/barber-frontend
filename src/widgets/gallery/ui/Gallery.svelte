@@ -1,13 +1,16 @@
 <script lang="ts">
+    import { PUBLIC_API } from "$env/static/public";
+    import type { GalleryModel } from "@entities/gallery/model/gallery";
     import { onMount } from "svelte";
     import Swiper from "swiper";
     import "swiper/css";
     import "swiper/css/navigation";
     import "swiper/css/pagination";
 
-    import { gallery } from "@entities/gallery/model/gallery";
 
     import { Navigation, Pagination } from "swiper/modules";
+
+    export let gallery: GalleryModel[] = []
     onMount(async () => {
         const swiper = new Swiper(".swiper", {
             modules: [Navigation, Pagination],
@@ -28,7 +31,7 @@
         });
     });
 </script>
-
+{#if gallery.length > 0}
 <section id="galler" class="max-h-screen py-20">
     <h2 class="text-center">Работы</h2>
     <div class="swiper  mt-10">
@@ -40,24 +43,18 @@
                 >
                     <img
                         class="block sm:hidden mx-auto. w-full h-full object-contain"
-                        src={item.mobileImage}
-                        alt={item.title}
-                    />
-                    <img
-                        class="hidden sm:block mx-auto w-full h-full object-contain"
-                        src={item.desktopImage}
-                        alt={item.title}
+                        src={`${PUBLIC_API}${item.image.url}`}
+                        alt="Галерея"
                     />
                 </div>
             {/each}
-            <!-- <div class="swiper-slide">Slide 2</div>
-            <div class="swiper-slide">Slide 3</div> -->
         </div>
         <div class="swiper-pagination"></div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
 </section>
+{/if}
 
 <style>
     .swiper-button-prev,

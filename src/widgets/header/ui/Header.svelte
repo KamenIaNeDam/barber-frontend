@@ -1,7 +1,10 @@
 <script lang="ts">
-  import DesktopHeader from "./DesktopHeader.svelte";
+    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+
+  // import DesktopHeader from "./DesktopHeader.svelte";
   import MobileHeader from "./MobileHeader.svelte";
+  export let socialMedias: SocialMediaModel[] = []
 </script>
 
 <!-- <DesktopHeader /> -->
-<MobileHeader />
+<MobileHeader socialMedias={socialMedias}/>

@@ -1,8 +1,14 @@
 <script lang="ts">
   import { menuItems } from "@entities/menu/model/menuItems";
-  import { contacts } from "@entities/contact/model/contact";
+  // import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
   import { NAME } from "@shared/constants/title";
+    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+    import type { ContactModel } from "@entities/contact/model/contact";
+
+
+  export let socialMedias: SocialMediaModel[] = []
+    export let contacts: ContactModel[] = [];
 </script>
 
 <footer class="py-10 px-5">
@@ -30,12 +36,15 @@
     <!-- Контакты -->
     <div>
       <h3 class="font-semibold mb-2">Контакты</h3>
-      <p class="text-gray-400 text-sm">Телефон: +7 123 456-78-90</p>
-      <p class="text-gray-400 text-sm">Адрес: Улица Лесников, 27, Красноярск, 660006</p>
-      <p class="text-gray-400 text-sm">Режим работы: Ежедневно: 10:00-21:00</p>
-        <div class="flex gap-4">
       {#each contacts as contact}
-        <ContactCard {contact} />
+        <p class="text-gray-400 text-sm">{contact.title}: {contact.value}</p>
+      {/each}
+      <!-- <p class="text-gray-400 text-sm">Телефон: +7 123 456-78-90</p>
+      <p class="text-gray-400 text-sm">Адрес: Улица Лесников, 27, Красноярск, 660006</p>
+      <p class="text-gray-400 text-sm">Режим работы: Ежедневно: 10:00-21:00</p> -->
+        <div class="flex gap-4">
+      {#each socialMedias as media}
+        <ContactCard contact={media} />
       {/each}
     </div>
 

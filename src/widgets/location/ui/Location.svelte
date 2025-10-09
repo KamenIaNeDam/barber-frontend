@@ -1,11 +1,20 @@
 <script lang="ts">
     import { PUBLIC_YANDEX_MAPS_API_KEY } from "$env/static/public";
+    import type { ContactModel } from "@entities/contact/model/contact";
+    import type { LocationModel } from "@entities/location/model/location";
 
     // 55.981218, 92.801386
-    export let long: number = 92.801386;
-    export let lat: number = 55.981218;
+    // export let long: number = 92.801386;
+    // export let lat: number = 55.981218;
 
     import { onMount } from "svelte";
+
+    export let location: LocationModel = {
+        long: 92.801386,
+        lat: 55.981218,
+    };
+
+    export let contacts: ContactModel[] = [];
 
     onMount(async () => {
         // Ждём, пока API загрузится
@@ -32,7 +41,7 @@
 
         const map = new YMap(document.getElementById("map"), {
             location: {
-                center: [long, lat],
+                center: [location.long, location.lat],
                 zoom: 17,
             },
         });
@@ -44,7 +53,7 @@
 
         map.addChild(
             new YMapDefaultUI.YMapDefaultMarker({
-                coordinates: [long, lat],
+                coordinates: [location.long, location.lat],
             }),
         );
 
@@ -76,7 +85,17 @@
     <div class="relative z-10">
         <h2 class="text-center pt-20">Контакты</h2>
         <div class="max-w-lg p-10 flex flex-col gap-4">
-            <div>
+            {#each contacts as contact}
+                <div>
+                    {contact.title}:<br />
+                    {#if contact.href}
+                        <a href={contact.href}>{contact.value}</a>
+                    {:else}
+                        {contact.value}
+                    {/if}
+                </div>
+            {/each}
+            <!-- <div>
                 Адрес:<br />
                 Улица Лесников, 27, Красноярск, 660006
             </div>
@@ -87,7 +106,7 @@
             <div>
                 Режим работы: <br />
                 Ежедневно: 10:00-21:00
-            </div>
+            </div> -->
         </div>
         <div id="map" class="w-full h-[400px]"></div>
     </div>

@@ -5,26 +5,28 @@
 	import { onMount } from "svelte";
 	import { openModal } from "@shared/stores/modal";
 	import CommingSoonModal from "@widgets/comming-soon/CommingSoonModal.svelte";
+	import { PUBLIC_YCLIENTS_SCRIPT } from "$env/static/public";
 
-	let { children } = $props();
+
+	
+
+    export let data;
 
 	onMount(() => {
-		openModal(CommingSoonModal);
-		// const timer = setTimeout(() => {
-		// 	openModal(CommingSoonModal);
-		// }, 1000);
-
-		// return () => clearTimeout(timer);
+		openModal(CommingSoonModal, {medias: data.socialMedias});
 	});
+
 </script>
 
 <svelte:head>
 	<!-- <link rel="icon" href={favicon} /> -->
-	<script
-		type="text/javascript"
-		src="https://w1709787.yclients.com/widgetJS"
-		charset="UTF-8"
-	></script>
+	{#if PUBLIC_YCLIENTS_SCRIPT}
+		<script
+			type="text/javascript"
+			src={PUBLIC_YCLIENTS_SCRIPT}
+			charset="UTF-8"
+		></script>
+	{/if}
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript">
 		(function (m, e, t, r, i, k, a) {
@@ -73,7 +75,7 @@
 	<!-- /Yandex.Metrika counter -->
 </svelte:head>
 
-<Header />
-{@render children?.()}
+<Header socialMedias={data.socialMedias}/>
+ <slot />
 <Modal />
-<Footer />
+<Footer socialMedias={data.socialMedias} contacts={data.contacts} />

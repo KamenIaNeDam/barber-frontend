@@ -1,16 +1,16 @@
 export interface AdminServiceModel {
-    id: number
-    title: string
-    price: number
+  id: number;
+  title: string;
+  price: number;
 
-    ordering: number;
-    published: boolean;
+  ordering: number;
+  published: boolean;
 }
 
 export interface AdminServiceCreateModel {
-    title: string
-    price: number
+  title: string;
+  price: number;
 
-    ordering: number;
-    published: boolean;
+  ordering: number;
+  published: boolean;
 }

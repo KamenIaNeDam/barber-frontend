@@ -105,9 +105,9 @@
 
         <div class="mb-4">
             <label class="block mb-1" for="type">Тип</label>
-            <select id="type" name="type">
+            <select id="type" name="type" bind:value={payload.type}>
                 {#each Object.entries(MediaType) as [k,v]}
-                    <option value="{v}" { ...(v === payload.type ? { selected: true } : {}) } >{k}</option>
+                    <option value="{v}">{k}</option>
                 {/each}
             </select>
         </div>

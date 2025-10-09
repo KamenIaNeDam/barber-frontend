@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
   import Button from "@shared/ui/Button.svelte";
-  import { contacts } from "@entities/contact/model/contact";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
   import { NAME } from "@shared/constants/title";
+    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+
+  export let contacts: SocialMediaModel[] = []
 </script>
 
 <section id="hero" class="h-screen w-full">
