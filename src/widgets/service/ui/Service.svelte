@@ -9,6 +9,9 @@
     class="hidden sm:block w-full text-black bg-white py-20 px-5"
 >
     <h2 class="text-center">Услуги</h2>
+    <p class="text-center max-w-xl mx-auto my-5 text-gray-500 !text-sm">
+        Ознакомьтесь с нашими услугами: стрижки, оформление бороды, укладки и другие процедуры для мужчин. Мы предлагаем честные цены и индивидуальный подход к каждому клиенту.
+    </p>
     <ul class="pt-10 grid grid-cols-2 gap-x-10 gap-y-4">
         {#each services as service}
             <li
@@ -37,6 +40,9 @@
     class="block sm:hidden w-full text-black bg-white py-20 px-5"
 >
     <h2 class="text-center">Услуги</h2>
+    <p class="text-center max-w-xl mx-auto my-5 text-gray-500 !text-sm">
+        Ознакомьтесь с нашими услугами: стрижки, оформление бороды, укладки и другие процедуры для мужчин. Мы предлагаем честные цены и индивидуальный подход к каждому клиенту.
+    </p>
     <ul class="pt-10 grid grid-cols-1 gap-x-10 gap-y-4">
         {#each services as service}
             <li

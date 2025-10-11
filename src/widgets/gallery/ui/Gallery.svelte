@@ -31,9 +31,12 @@
         });
     });
 </script>
+
 {#if gallery.length > 0}
 <section id="galler" class="max-h-screen py-20">
     <h2 class="text-center">Работы</h2>
+    <p class="text-center max-w-xl mx-auto my-5 text-gray-500 !text-sm">
+        Посмотрите наши лучшие стрижки, бороды и укладки. Мы гордимся каждой работой и любим, когда клиенты уходят довольными!    </p>
     <div class="swiper  mt-10">
         <div class="swiper-wrapper h-full">
             {#each gallery as item}
@@ -44,7 +47,7 @@
                     <img
                         class="mx-auto. w-full h-full object-contain"
                         src={`${PUBLIC_API}${item.image.url}`}
-                        alt="Галерея"
+                        alt={`Работа барбершопа №${item.id}`}
                     />
                 </div>
             {/each}
