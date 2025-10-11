@@ -7,7 +7,7 @@
     import AdminSocialMedias from "@widgets/admin-social-media/ui/AdminSocialMedias.svelte";
     export let data;
 </script>
-<div class = 'px-5'>
+<div class = 'p-4'>
     <h1>Панель администратора</h1>
     <Seo seo={data.seo} />
 
@@ -20,4 +20,3 @@
 
     <AdminGalleries gallery = {data.gallery} />
 </div>
-

@@ -145,6 +145,20 @@
                 bind:value={payload.admin_text}
             />
         </div>
+
+        {#if feedback}
+            <div class="mb-4">
+                <label class="block mb-1" for="created_at">Дата создания</label>
+                <input
+                    id="created_at"
+                    name="created_at"
+                    type="text"
+                    disabled
+                    class="w-full border px-3 py-2 rounded"
+                    value={feedback.created_at}
+                />
+            </div>
+            {/if}
         <Button
             label="{loadingState? "Загрузка":feedback ? 'Сохранить': 'Создать'}"
             onClick={() => {}}

@@ -10,8 +10,8 @@
     'px-4 py-2 rounded transition-colors duration-200 focus:outline-none border';
 
   const variants = {
-    primary: 'text-white hover:bg-blue-700 disabled:bg-blue-300',
-    secondary: 'bg-white text-black hover:bg-blue-700 disabled:bg-gray-100 hover:text-white',
+    primary: 'text-white hover:bg-blue-700 active:bg-blue-700 disabled:bg-blue-300',
+    secondary: 'bg-white text-black hover:bg-blue-700 active:bg-blue-700 disabled:bg-gray-100 hover:text-white',
     outline:
       'border border-gray-400 text-gray-800 hover:bg-gray-100   disabled:text-gray-400'
   };

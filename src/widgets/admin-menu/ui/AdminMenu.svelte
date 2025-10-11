@@ -1,5 +1,5 @@
 <div class="">
-    <li class="w-full flex gap-5 justify-center">
+    <li class="w-full flex gap-5 justify-center text-xl">
         <ul>
             <a href="/admin">
             Главная
