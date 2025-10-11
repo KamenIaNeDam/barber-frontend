@@ -8,7 +8,7 @@
 	import { PUBLIC_YCLIENTS_SCRIPT } from "$env/static/public";
 
 
-	
+
 
     export let data;
 
@@ -73,6 +73,11 @@
 		</div>
 	</noscript>
 	<!-- /Yandex.Metrika counter -->
+
+	<script
+        src="https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onloadFunction"
+        defer
+    ></script>
 </svelte:head>
 
 <Header socialMedias={data.socialMedias}/>

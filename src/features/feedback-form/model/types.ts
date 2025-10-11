@@ -1,5 +1,15 @@
 export interface FeedbackFormData {
-  fullName: string;
+  fio: string;
   contact: string;
-  message: string;
+  text: string;
+  captcha: string;
+}
+
+export interface FeedbackModel {
+  id: number;
+  fio: string;
+  contact: string;
+  text: string;
+  captcha: string;
+  created_at: string;
 }

@@ -1,7 +1,9 @@
 <script lang="ts">
     import { PUBLIC_YANDEX_MAPS_API_KEY } from "$env/static/public";
     import type { ContactModel } from "@entities/contact/model/contact";
+    import ContactCard from "@entities/contact/ui/contact-card.svelte";
     import type { LocationModel } from "@entities/location/model/location";
+    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
 
     // 55.981218, 92.801386
     // export let long: number = 92.801386;
@@ -15,6 +17,7 @@
     };
 
     export let contacts: ContactModel[] = [];
+    export let socialMedias: SocialMediaModel[] = [];
 
     onMount(async () => {
         // Ждём, пока API загрузится
@@ -76,38 +79,42 @@
     ></script>
 </svelte:head>
 
-<section id="contacts" class="w-full text-black bg-white">
-    <img
+<section id="contacts" class="w-full text-black bg-white  pt-20">
+    <!-- <img
         alt="compas"
         src="/compas.png"
         class="absolute w-[40%] right-0 object-cover opacity-25"
-    />
-    <div class="relative z-10">
-        <h2 class="text-center pt-20">Контакты</h2>
-        <div class="max-w-lg p-10 flex flex-col gap-4">
+    /> -->
+    <div class="relative z-10 space-y-5 ">
+        <h2 class="text-center">Наши контакты</h2>
+        <p class="text-center max-w-xl mx-auto text-gray-500 !text-sm px-5">
+            Хотите записаться на стрижку или бритье? Свяжитесь с нами любым удобным способом — по телефону, мессенджеру или приезжайте в наш барбершоп. Мы всегда рады новым и постоянным клиентам!
+        </p>
+        <div class="max-w-lg flex flex-col gap-4 px-5">
             {#each contacts as contact}
                 <div>
-                    {contact.title}:<br />
+                    <h3 class="text-xl">{contact.title}:</h3>
+                    <div class="">
                     {#if contact.href}
                         <a href={contact.href}>{contact.value}</a>
                     {:else}
-                        {contact.value}
+                        <span>{contact.value}</span>
                     {/if}
+                    </div>
                 </div>
             {/each}
-            <!-- <div>
-                Адрес:<br />
-                Улица Лесников, 27, Красноярск, 660006
-            </div>
-            <div>
-                Телефон:<br />
-                <a href="tel:+7 (999) 999-99-99"> +7 (999) 999-99-99 </a>
-            </div>
-            <div>
-                Режим работы: <br />
-                Ежедневно: 10:00-21:00
-            </div> -->
         </div>
-        <div id="map" class="w-full h-[400px]"></div>
+        {#if socialMedias.length > 0}
+        <div class="max-w-lg px-5 flex gap-4 ">
+            {#each socialMedias as media}
+                <div class="bg-black rounded-full p-1">
+
+              <ContactCard contact={media} />
+                </div>
+            {/each}
+        </div>
+        {/if}
+
+    <div id="map" class="w-full h-[400px]"></div>
     </div>
 </section>

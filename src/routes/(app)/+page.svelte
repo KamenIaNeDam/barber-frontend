@@ -56,6 +56,6 @@
 <Service services={data.mainPage.services}/>
 <!-- <About /> -->
 <Gallery gallery={data.mainPage.gallery}/>
-<Location location={data.mainPage.location} contacts={data.mainPage.contacts} />
+<Location location={data.mainPage.location} contacts={data.mainPage.contacts} socialMedias={data.mainPage.medias} />
 <!-- <Review /> -->
-<!-- <Feedback /> -->
+<Feedback />
