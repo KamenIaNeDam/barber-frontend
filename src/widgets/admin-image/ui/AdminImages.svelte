@@ -27,16 +27,15 @@ import { getImages } from "@entities/image/api";
     }
   }
 
-  const cols = 3
 
 </script>
 
 <div class="py-5">
 <h1>Загруженные изображения: ({images.length})</h1>
-<div class="grid grid-cols-{cols} gap-2 w-full">
-    {#each Array.from({ length: cols }, (_, i) => i) as n }
+<div class="grid grid-cols-3 gap-2 w-full">
+    {#each Array.from({ length: 3 }, (_, i) => i) as n }
         <div class="flex flex-col gap-2">
-            {#each images.filter((item, i) => (i)%cols === n  && item) as image}
+            {#each images.filter((item, i) => (i)%3 === n  && item) as image}
                 <div>
                     <img class="w-full h-auto" src="{`${PUBLIC_API}${image.url}`}" alt="{`${image.id}`}"/>
                 </div>

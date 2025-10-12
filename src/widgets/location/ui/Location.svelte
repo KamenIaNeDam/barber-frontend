@@ -82,7 +82,7 @@
           "streetAddress": "ул. Лесников, 27",
           "addressLocality": "Красноярск",
           "addressRegion": "Красноярский край",
-          "postalCode": "660000",
+          "postalCode": "660006",
           "addressCountry": "RU"
         },
         "geo": {
