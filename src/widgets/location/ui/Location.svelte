@@ -73,7 +73,7 @@
 
     const contactJson = {
         "@context": "https://schema.org",
-        "@type": "Barbershop",
+        "@type": "HairSalon",
         "name": "Барбершоп «Гётин» — Красноярск",
         "url": "https://getinbarber.ru",
         // "telephone": "+7 (999) 123-45-67",
