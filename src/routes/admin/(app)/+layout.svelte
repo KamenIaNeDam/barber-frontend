@@ -5,10 +5,12 @@
     import { onMount } from "svelte";
 
     export let data;
+    tokenStore.set(data.accessToken);
 
-    onMount(() => {
-        tokenStore.set(data.accessToken);
-    });
+    // onMount(() => {
+    //   console.log("ACCESS TOKEN", data.accessToken)
+    //     tokenStore.set(data.accessToken);
+    // });
 </script>
 
 <div class="bg-gray-100 text-black min-h-screen">

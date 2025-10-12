@@ -70,6 +70,35 @@
 
         map.addChild(controls);
     });
+
+    const contactJson = {
+        "@context": "https://schema.org",
+        "@type": "Barbershop",
+        "name": "Барбершоп «Гётин» — Красноярск",
+        "url": "https://getinbarber.ru",
+        // "telephone": "+7 (999) 123-45-67",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "ул. Лесников, 27",
+          "addressLocality": "Красноярск",
+          "addressRegion": "Красноярский край",
+          "postalCode": "660000",
+          "addressCountry": "RU"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": location.lat,
+          "longitude": location.long
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "10:00",
+            "closes": "21:00"
+          },
+        ]
+      };
 </script>
 
 <svelte:head>
@@ -77,6 +106,8 @@
         src={`https://api-maps.yandex.ru/v3/?apikey=${PUBLIC_YANDEX_MAPS_API_KEY}&lang=ru_RU`}
         type="text/javascript"
     ></script>
+    {@html `<script type="application/ld+json">${JSON.stringify(contactJson)}</script>`}
+
 </svelte:head>
 
 <section id="contacts" class="w-full text-black bg-white  pt-20">

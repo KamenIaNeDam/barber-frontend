@@ -2,7 +2,28 @@
     import type { ServiceModel } from "@entities/service/model/service";
     import Button from "@shared/ui/Button.svelte";
     export let services: ServiceModel[] = []
+
+    const servicesJson = {
+        "@context": "https://schema.org",
+        "@type": "OfferCatalog",
+        "name": "Услуги барбершопа «Гётин» в Красноярске",
+        "itemListElement": services.map((item) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": item.title
+          },
+          "price": item.price,
+          "priceCurrency": "RUB"
+        }))
+      };
+
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${JSON.stringify(servicesJson)}</script>`}
+</svelte:head>
+
 
 <section
     id="service"

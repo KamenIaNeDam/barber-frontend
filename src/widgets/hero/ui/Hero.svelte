@@ -5,7 +5,20 @@
     import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
 
   export let contacts: SocialMediaModel[] = []
+
+  const heroJson = {
+    "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Барбершоп «Гётин»",
+        "url": "https://getinbarber.ru",
+        "logo": "https://getinbarber.ru/favicon.jpg",
+        "sameAs": contacts.map((item) => item.url)
+  }
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${JSON.stringify(heroJson)}</script>`}
+</svelte:head>
 
 <section id="hero" class="h-screen w-full">
   <div

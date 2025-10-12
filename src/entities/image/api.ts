@@ -21,3 +21,25 @@ export async function uploadImage(
     token,
   );
 }
+
+export interface AdminImageQueryParams {
+  id?: number;
+
+  limit?: number;
+  offset?: number;
+}
+
+export async function getImages(
+  fetchFn: typeof fetch,
+  token: string,
+  params: AdminImageQueryParams,
+) {
+  // @ts-ignore
+  const searchParams = new URLSearchParams({ ...params });
+  return await api<ImageModel[]>(
+    fetchFn,
+    `/admin/image?${searchParams}`,
+    {},
+    token,
+  );
+}

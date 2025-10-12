@@ -22,6 +22,15 @@
   <link rel="icon" type="image/jpg" sizes="16x16" href="/favicon.jpg" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon.jpg" />
   <link rel="manifest" href="/site.webmanifest" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Региональность (для Яндекс и локального SEO) -->
+  <meta name="geo.region" content="RU-KYA" /> <!-- RU-KYA = Красноярский край -->
+  <meta name="geo.placename" content="Красноярск" />
+  <meta name="geo.position" content="{data.mainPage.location.lat};{data.mainPage.location.long}" />
+  <meta name="ICBM" content="{data.mainPage.location.lat}, {data.mainPage.location.long}" />
+  <!-- Canonical -->
+<link rel="canonical" href="https://getinbarber.ru/" />
   <meta
     name="description"
     content="{data.mainPage.seo.description}"

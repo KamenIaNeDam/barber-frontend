@@ -30,7 +30,27 @@
             },
         });
     });
+
+    const galleryJson = {
+      "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Примеры работ барбершопа «Гётин» в Красноярске",
+          "itemListElement":gallery.map((item, i) => {
+              return {
+                "@type": "ListItem",
+                "position": i+1,
+                "url": `${PUBLIC_API}${item.image.url}`
+              }
+            })
+
+    }
+
+
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${JSON.stringify(galleryJson)}</script>`}
+</svelte:head>
 
 {#if gallery.length > 0}
 <section id="galler" class="py-20">
