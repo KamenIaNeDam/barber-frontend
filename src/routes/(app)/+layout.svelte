@@ -74,6 +74,16 @@
 	</noscript>
 	<!-- /Yandex.Metrika counter -->
 
+	<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4063VF65P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-R4063VF65P');
+  </script>
+
 	<script
         src="https://smartcaptcha.yandexcloud.net/captcha.js?render=onload&onload=onloadFunction"
         defer
