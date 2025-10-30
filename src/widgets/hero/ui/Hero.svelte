@@ -49,7 +49,7 @@
       <h2>Мужские стрижки, борода и бритьё</h2>
       <h3 class="text-gray-500 !text-sm">Красноярск, ул. Лесников, 27</h3>
       <div>
-          <Button _class="ms_booking bg-opacity-0" label="Записаться" onClick={() => {}} />
+          <Button _class="ms_booking bg-black/0" label="Записаться" onClick={() => {}} />
           <!-- <Button class="ms_booking font-bold bg-non font-white">Записаться</Button> -->
       </div>
     </div>
