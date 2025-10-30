@@ -1,5 +1,5 @@
 import { api } from "@shared/api/base";
-import type { LocationModel } from "../model/location";
+import type { LocationModel } from "../model/types";
 
 const LOCATION_ADMIN_PATH = "/admin/location";
 

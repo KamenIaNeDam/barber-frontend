@@ -1,55 +1,80 @@
 <script lang="ts">
     import { setSeo } from "@entities/seo/api/seo";
-    import type { Seo } from "@entities/seo/model/seo";
+    import { adminSeoSchema, type AdminSeoSchema } from "@entities/seo/model/schema";
+    import type { Seo } from "@entities/seo/model/types";
     import { tokenStore } from "@shared/stores/auth";
-    import { addToast } from "@shared/ui/toast/store";
+    import { toast } from "svelte-sonner";
+    import { superForm, type SuperValidated } from "sveltekit-superforms";
+    import { zod4Client } from "sveltekit-superforms/adapters";
+    import * as Form from "@shared/ui/form/index"
+    import Input from "@shared/ui/input/input.svelte";
+    import Textarea from "@shared/ui/textarea/textarea.svelte";
 
-    export let seo: Seo = {}
+    interface AdminSeoProps {
+      seo?: Seo,
+      form: SuperValidated<AdminSeoSchema>
+    }
 
-    const handelSubmit = async () => {
-        seo = await setSeo(fetch, $tokenStore, seo)
-        addToast("Успешно обновлено", 'success')
+    let {
+      seo = undefined,
+      form,
+    }: AdminSeoProps = $props()
+
+    const sform = superForm(form, {
+        validators: zod4Client(adminSeoSchema),
+    });
+
+    const { form: formData, errors, validateForm } = sform;
+
+
+    const handelSubmit = async (event: Event) => {
+      event.preventDefault()
+      const validationResult = await validateForm()
+
+      if (!validationResult.valid ) {
+        errors.set(validationResult.errors)
+        toast.error("Ошибка в заполнении формы", )
+        return
+      }
+      const payload: Seo = {
+        title: $formData.title,
+        description: $formData.description,
+        keywords: $formData.keywords,
+      }
+        seo = await setSeo(fetch, $tokenStore, payload)
+        toast.success("Успешно обновлено")
     }
 
 </script>
 
-<div class="py-5">
-    <h2 class="my-5">SEO</h2>
-    <form on:blur={handelSubmit}>
-        <div class="mb-4">
-            <label class="block mb-1" for="title">SEO заголовок</label>
-            <input
-                id="title"
-                name="title"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                on:blur={handelSubmit}
-                bind:value={seo.title}
-            />
-        </div>
+    <form onfocusout={handelSubmit} class="space-y-4">
+        <Form.Field form={sform} name="title">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>SEO заголовок</Form.Label>
+                <Textarea {...attrs} bind:value={$formData.title} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="description">SEO Описание</label>
-            <input
-                id="description"
-                name="description"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                on:blur={handelSubmit}
-                bind:value={seo.description}
-            />
-        </div>
+        <Form.Field form={sform} name="description">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>SEO Описание</Form.Label>
+                <Textarea {...attrs} bind:value={$formData.description} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="email">SEO Ключевые слова</label>
-            <input
-                id="keywords"
-                name="keywords"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                on:blur={handelSubmit}
-                bind:value={seo.keywords}
-            />
-        </div>
+        <Form.Field form={sform} name="keywords">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>SEO Ключевые слова</Form.Label>
+                <Textarea {...attrs} bind:value={$formData.keywords} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
     </form>
-</div>

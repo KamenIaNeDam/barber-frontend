@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { ServiceModel } from "@entities/service/model/service";
+    import type { ServiceModel } from "@entities/service/model/types";
     import Button from "@shared/ui/Button.svelte";
     export let services: ServiceModel[] = []
 
@@ -50,8 +50,6 @@
             <Button
                 _class="ms_booking"
                 label="Записаться"
-                onClick={() => console.log("Clicked")}
-                variant="secondary"
             />
     </div>
 </section>
@@ -81,8 +79,6 @@
             <Button
                 _class="ms_booking"
                 label="Записаться"
-                onClick={() => console.log("Clicked")}
-                variant="secondary"
             />
     </div>
 </section>

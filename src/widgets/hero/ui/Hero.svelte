@@ -1,9 +1,8 @@
 <script lang="ts">
-  import Button from "@shared/ui/Button.svelte";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
   import { NAME } from "@shared/constants/title";
-    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
-
+    import type { SocialMediaModel } from "@entities/social-media/model/types";
+    import Button from "@shared/ui/Button.svelte";
   export let contacts: SocialMediaModel[] = []
 
   const heroJson = {
@@ -50,7 +49,8 @@
       <h2>Мужские стрижки, борода и бритьё</h2>
       <h3 class="text-gray-500 !text-sm">Красноярск, ул. Лесников, 27</h3>
       <div>
-          <Button _class="ms_booking" label="Записаться" onClick={() => {}} />
+          <Button _class="ms_booking bg-opacity-0" label="Записаться" onClick={() => {}} />
+          <!-- <Button class="ms_booking font-bold bg-non font-white">Записаться</Button> -->
       </div>
     </div>
     <div class="flex gap-4">

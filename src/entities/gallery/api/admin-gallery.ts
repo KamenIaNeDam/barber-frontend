@@ -2,7 +2,8 @@ import { api } from "@shared/api/base";
 import type {
   AdminGalleryCreateModel,
   AdminGalleryModel,
-} from "../model/gallery";
+  AdminGalleryUpdateModel,
+} from "../model/types";
 
 const GALLERY_ADMIN_PATH = "/admin/gallery";
 
@@ -49,7 +50,7 @@ export async function updateGallery(
   fetchFn: typeof fetch,
   token: string,
   id: number,
-  payload: AdminGalleryCreateModel,
+  payload: AdminGalleryUpdateModel,
 ) {
   return await api<AdminGalleryModel>(
     fetchFn,

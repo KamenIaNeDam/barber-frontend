@@ -1,5 +1,5 @@
 import { api } from "@shared/api/base";
-import type { ContactModel } from "../model/contact";
+import type { ContactModel } from "../model/types";
 
 const CONTACT_PATH = "/api/contact";
 

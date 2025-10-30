@@ -1,6 +1,6 @@
 <script lang="ts">
     import { PUBLIC_API } from "$env/static/public";
-    import type { GalleryModel } from "@entities/gallery/model/gallery";
+    import type { GalleryModel } from "@entities/gallery/model/types";
     import { onMount } from "svelte";
     import Swiper from "swiper";
     import "swiper/css";

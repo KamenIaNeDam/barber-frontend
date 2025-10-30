@@ -12,9 +12,9 @@
 
     export let data;
 
-	onMount(() => {
-		openModal(CommingSoonModal, {medias: data.socialMedias});
-	});
+	// onMount(() => {
+	// 	openModal(CommingSoonModal, {medias: data.socialMedias});
+	// });
 
 </script>
 

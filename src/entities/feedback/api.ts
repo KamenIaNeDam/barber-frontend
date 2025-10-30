@@ -3,7 +3,7 @@ import type {
   AdminFeedbackCreateModel,
   AdminFeedbackModel,
   AdminFeedbackUpdateModel,
-} from "./model";
+} from "./model/types";
 
 const FEEDBACK_ADMIN_API = "/admin/feedback";
 

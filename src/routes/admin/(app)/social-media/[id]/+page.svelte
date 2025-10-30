@@ -1,8 +1,22 @@
 <script lang="ts">
-    import AdminContact from '@features/admin-contact/ui/AdminContact.svelte';
     import AdminSocialMedia from '@features/admin-social-media/ui/AdminSocialMedia.svelte';
 
-    export let data;
+    import * as Breadcrumb from "@shared/ui/breadcrumb/index.js";
+    let {data} = $props()
 </script>
-
-    <AdminSocialMedia contact={data.socialMedia} />
+<Breadcrumb.Root >
+    <Breadcrumb.List>
+        <Breadcrumb.Item>
+          <Breadcrumb.Link href="/admin">Главная</Breadcrumb.Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Separator />
+        <Breadcrumb.Item>
+          <Breadcrumb.Link href="/admin/social-media">Соц.Сети</Breadcrumb.Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Separator />
+        <Breadcrumb.Item>
+          <Breadcrumb.Page>{data.socialMedia.id}</Breadcrumb.Page>
+        </Breadcrumb.Item>
+      </Breadcrumb.List>
+</Breadcrumb.Root>
+    <AdminSocialMedia socialMedia={data.socialMedia} form={data.form}/>

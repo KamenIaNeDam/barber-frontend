@@ -1,4 +1,4 @@
-import { getFeedbacks } from "@entities/feedback/api";
+import { getFeedbacks } from "@entities/feedback/api.js";
 import { error, redirect } from "@sveltejs/kit";
 
 export async function load({ fetch, cookies }) {
@@ -13,6 +13,6 @@ export async function load({ fetch, cookies }) {
       feedbacks,
     };
   } catch (err) {
-    return error(404, "Contact not found");
+    return error(404, "Feedbacks not found");
   }
 }

@@ -4,7 +4,7 @@
   import CloseIcon from "@shared/ui/icons/CloseIcon.svelte";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
   import { NAME } from "@shared/constants/title";
-    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+    import type { SocialMediaModel } from "@entities/social-media/model/types";
 
   export let socialMedias: SocialMediaModel[] = []
   let isOpen = false;

@@ -1,6 +1,8 @@
 <!-- src/routes/+page.svelte -->
 <script lang="ts">
+    import type { FeedbackSchema } from "@features/feedback-form/model/schema";
   import FeedbackForm  from "@features/feedback-form/ui/FeedbackForm.svelte";
+    import type { SuperValidated } from "sveltekit-superforms";
 
   const feedbackJson = {
       "@context": "https://schema.org",
@@ -21,6 +23,14 @@
         }
       }
     };
+
+  interface FeedbackProps {
+    form: SuperValidated<FeedbackSchema>
+  }
+
+  let {
+    form,
+  }: FeedbackProps = $props()
 </script>
 
 <svelte:head>
@@ -35,6 +45,6 @@
   </p>
   <div class="">
 
-    <FeedbackForm />
+    <FeedbackForm form={form}/>
   </div>
 </section>
