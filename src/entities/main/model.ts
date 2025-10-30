@@ -1,10 +1,10 @@
-import type { ContactModel } from "@entities/contact/model/contact";
-import type { GalleryModel } from "@entities/gallery/model/gallery";
-import type { LocationModel } from "@entities/location/model/location";
-import type { Seo } from "@entities/seo/model/seo";
-import type { ServiceModel } from "@entities/service/model/service";
-import type { AdminSocialMediaModel } from "@entities/social-media/model/admin-social-media";
-import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+import type { ContactModel } from "@entities/contact/model/types";
+import type { GalleryModel } from "@entities/gallery/model/types";
+import type { LocationModel } from "@entities/location/model/types";
+import type { Seo } from "@entities/seo/model/types";
+import type { ServiceModel } from "@entities/service/model/types";
+
+import type { SocialMediaModel } from "@entities/social-media/model/types";
 
 export interface MainPageModel {
   seo: Seo;

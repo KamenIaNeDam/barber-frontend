@@ -5,5 +5,5 @@ export const menuItems = [
   { title: "Работы", href: "#galler" },
   { title: "Контакты", href: "#contacts" },
   // { title: "Отзывы", href: "#review" },
-  // { title: "Обратная связь", href: "#feedback" },
+  { title: "Обратная связь", href: "#feedback" },
 ];

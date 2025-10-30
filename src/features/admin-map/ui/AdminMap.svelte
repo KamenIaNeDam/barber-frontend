@@ -1,10 +1,9 @@
 <script lang="ts">
     import { PUBLIC_YANDEX_MAPS_API_KEY } from "$env/static/public";
     import { setLocation } from "@entities/location/api/admin-location";
-    import type { LocationModel } from "@entities/location/model/location";
+    import type { LocationModel } from "@entities/location/model/types";
     import { debounce } from "@shared/lib/debounce";
     import { tokenStore } from "@shared/stores/auth";
-    import { addToast } from "@shared/ui/toast/store";
 
     // 55.981218, 92.801386
     // export let long: number = 92.801386;
@@ -16,13 +15,16 @@
     };
 
     import { onMount } from "svelte";
+    import { toast } from "svelte-sonner";
 
     onMount(async () => {
         // Ждём, пока API загрузится
         function waitForYMaps3() {
             return new Promise((resolve) => {
                 const check = () => {
+                  // @ts-ignore
                     if (window.ymaps3 && window.ymaps3.ready) {
+                      // @ts-ignore
                         window.ymaps3.ready.then(resolve);
                     } else {
                         requestAnimationFrame(check);
@@ -38,6 +40,7 @@
             YMapDefaultSchemeLayer,
             YMapDefaultFeaturesLayer,
             YMapControls,
+        // @ts-ignore
         } = ymaps3;
 
         const map = new YMap(document.getElementById("map"), {
@@ -57,8 +60,6 @@
                 coordinates: [location.long, location.lat],
                 draggable: true,
                 onDragMove: debounce(async (coordinates: number[]) => {
-                    console.log("Debounced coords:", coordinates);
-
                     location = {
                         long: coordinates[0],
                         lat: coordinates[1],
@@ -67,11 +68,11 @@
                     try{
                         await setLocation(fetch, $tokenStore, location)
                     } catch (error) {
-                        addToast(String(error), "error")
+                        toast.error(String(error))
                         return
                     }
 
-                    addToast("Карта успешно обновлена", "success")
+                    toast.success("Карта успешно обновлена")
 
                 }, 300),
             }),
@@ -79,10 +80,12 @@
 
         const controls = new YMapControls({ position: "right" });
         controls.addChild(
+          // @ts-ignore
             new YMapDefaultUI.YMapZoomControl({
                 easing: "linear",
             }),
         );
+        // @ts-ignore
         controls.addChild(new YMapDefaultUI.YMapGeolocationControl());
 
         map.addChild(controls);

@@ -1,9 +1,9 @@
 <script lang="ts">
     import { PUBLIC_YANDEX_MAPS_API_KEY } from "$env/static/public";
-    import type { ContactModel } from "@entities/contact/model/contact";
+    import type { ContactModel } from "@entities/contact/model/types";
     import ContactCard from "@entities/contact/ui/contact-card.svelte";
-    import type { LocationModel } from "@entities/location/model/location";
-    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+    import type { LocationModel } from "@entities/location/model/types";
+    import type { SocialMediaModel } from "@entities/social-media/model/types";
 
     // 55.981218, 92.801386
     // export let long: number = 92.801386;

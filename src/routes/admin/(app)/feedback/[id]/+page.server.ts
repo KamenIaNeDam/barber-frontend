@@ -1,5 +1,8 @@
-import { getFeedbackByID } from "@entities/feedback/api.js";
+import { getFeedbackByID } from "@entities/feedback/api";
+import { adminFeedbackUpdateSchema } from "@entities/feedback/model/schema.js";
 import { error, redirect } from "@sveltejs/kit";
+import { superValidate } from "sveltekit-superforms";
+import { zod4 } from "sveltekit-superforms/adapters";
 
 export async function load({ fetch, cookies, params }) {
   const accessToken = cookies.get("access_token") || null;
@@ -15,6 +18,7 @@ export async function load({ fetch, cookies, params }) {
     );
     return {
       feedback,
+      form: await superValidate(feedback, zod4(adminFeedbackUpdateSchema)),
     };
   } catch (err) {
     return error(404, "Feedback not found");

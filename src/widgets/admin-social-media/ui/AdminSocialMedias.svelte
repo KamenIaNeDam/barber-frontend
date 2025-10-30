@@ -1,14 +1,15 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { getSocialMedias } from "@entities/social-media/api/admin-social-media";
-  import type { AdminSocialMediaModel } from "@entities/social-media/model/admin-social-media";
   import { tokenStore } from "@shared/stores/auth";
-  import Button from "@shared/ui/Button.svelte";
-
-  export let contacts: AdminSocialMediaModel[] = [];
+    import Button from "@shared/ui/button/button.svelte";
+  import * as Table from "@shared/ui/table/index"
+  import * as Empty from "@shared/ui/empty/index";
+    import Checkbox from "@shared/ui/checkbox/checkbox.svelte";
+  let {contacts} = $props()
 
   const LIMIT = 25;
-  let hasMore = contacts.length >= LIMIT;
+  let hasMore = $state(contacts.length >= LIMIT);
   const loadMore = async () => {
     const currentItems = contacts.length;
     const res = await getSocialMedias(fetch, $tokenStore, {
@@ -23,60 +24,67 @@
   };
 </script>
 
-<div class="py-5">
   <div class="flex justify-between items-center">
     <h2 class="my-5">Соц. сети</h2>
     <Button
-      onClick={() => {
-        goto("/admin/social-media/create");
-      }}
-      variant="secondary"
-      label="Добавить"
-    />
+      href="/admin/social-media/create"
+    >Добавить</Button>
   </div>
+  <div class="rounded-md border">
+    <Table.Root>
+      <Table.Header>
+        <Table.Row>
+            <Table.Head>ID</Table.Head>
+            <Table.Head>Ссылка</Table.Head>
+            <Table.Head>Тип</Table.Head>
+            <Table.Head>Очередность</Table.Head>
+            <Table.Head>Опубликован</Table.Head>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {#each contacts as item (item.id)}
 
-  <div class="overflow-x-auto w-full">
-    <table class="table-auto min-w-full border-collapse rounded-lg shadow-sm">
-      <thead class="bg-gray-100 text-gray-700 uppercase text-sm">
-        <tr>
-          <th class="px-4 py-2 text-left">ID</th>
-          <th class="px-4 py-2 text-left">Ссылка</th>
-          <th class="px-4 py-2 text-left">Тип</th>
-          <th class="px-4 py-2 text-left">Очередность</th>
-          <th class="px-4 py-2 text-left">Опубликован</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        {#each contacts as contact}
-          <tr
-            class="hover:bg-gray-50 transition"
-            on:click={() => {
-              goto(`/admin/social-media/${contact.id}`);
-            }}
-          >
-            <td class="px-4 py-2">{contact.id}</td>
-            <td class="px-4 py-2 font-medium text-gray-800">{contact.url}</td>
-            <td class="px-4 py-2">{contact.type}</td>
-            <td class="px-4 py-2 text-center">{contact.ordering}</td>
-            <td class="px-4 py-2">
-              {#if contact.published}
-                <!-- <span class="inline-block px-2 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full"> -->
-                Да
-                <!-- </span> -->
-              {:else}
-                <!-- <span class="inline-block px-2 py-1 text-xs font-semibold text-red-700 bg-red-100 rounded-full"> -->
-                Нет
-                <!-- </span> -->
-              {/if}
-            </td>
-          </tr>
+            <Table.Row class="hover:bg-gray-300 cursor-pointer" onclick={() => goto(`/admin/social-media/${item.id}`)}>
+
+                <Table.Cell>
+                    {item.id}
+                </Table.Cell>
+                <Table.Cell>
+                   {item.url}
+                </Table.Cell>
+                <Table.Cell>
+                    {item.type}
+                </Table.Cell>
+                <Table.Cell>
+                    {item.ordering}
+                </Table.Cell>
+                <Table.Cell>
+                    <Checkbox disabled  checked={item.published} />
+                </Table.Cell>
+
+            </Table.Row>
+
+        {:else}
+          <Table.Row>
+            <Table.Cell colspan={4} class="text-center">
+                <Empty.Root>
+                  <Empty.Header>
+                    <Empty.Title>Ничего нет</Empty.Title>
+                  </Empty.Header>
+                  <Empty.Content>
+                    <Button
+                        href="/admin/social-media/create"
+                    >Создать</Button>
+                  </Empty.Content>
+                </Empty.Root>
+            </Table.Cell>
+          </Table.Row>
         {/each}
-      </tbody>
-    </table>
+      </Table.Body>
+    </Table.Root>
+  </div>
     {#if hasMore}
       <div class="flex justify-center items-center">
-        <Button label="Еще" variant="secondary" onClick={loadMore} />
+        <Button onclick={loadMore} >Показать еще</Button>
       </div>
     {/if}
-  </div>
-</div>

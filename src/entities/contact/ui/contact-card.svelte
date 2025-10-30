@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
+    import type { SocialMediaModel } from "@entities/social-media/model/types";
     import { contactIcons } from "./icons";
     export let contact: SocialMediaModel;
 </script>

@@ -2,7 +2,7 @@ import { api } from "@shared/api/base";
 import type {
   AdminContactCreateModel,
   AdminContactModel,
-} from "../model/admin-contact";
+} from "../model/types";
 
 const CONTACT_ADMIN_PATH = "/admin/contact";
 
@@ -19,6 +19,7 @@ export async function getContacts(
   token: string,
   params: AdminContactsQueryParams,
 ) {
+  // @ts-ignore
   const searchParams = new URLSearchParams({ ...params });
   return await api<AdminContactModel[]>(
     fetchFn,

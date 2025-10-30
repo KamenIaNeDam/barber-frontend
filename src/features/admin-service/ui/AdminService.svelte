@@ -1,134 +1,151 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
-    import type { AdminServiceModel, AdminServiceCreateModel } from "@entities/service/model/admin-service";
+    import type { AdminServiceModel, AdminServiceCreateModel } from "@entities/service/model/types";
     import { createService, updateService, getServiceByID, deleteService } from "@entities/service/api/admin-service";
     import { tokenStore } from "@shared/stores/auth";
-    import Button from "@shared/ui/Button.svelte";
-    import { addToast } from "@shared/ui/toast/store";
+    import { superForm, type SuperValidated } from "sveltekit-superforms";
+    import { adminServiceSchema, type AdminServiceSchema } from "@entities/service/model/schema";
+    import { toast } from "svelte-sonner";
+    import Button from "@shared/ui/button/button.svelte";
+    import { zod4Client } from "sveltekit-superforms/adapters";
+    import * as Form from "@shared/ui/form/index"
+    import Input from "@shared/ui/input/input.svelte";
+    import Switch from "@shared/ui/switch/switch.svelte";
 
-    export let service: AdminServiceModel | undefined = undefined;
+    interface AdminServiceProps {
+      service?: AdminServiceModel,
+      form: SuperValidated<AdminServiceSchema>
+    }
 
-    let payload: AdminServiceCreateModel = {
-        title: service?.title || "",
-        price: service?.price || 0,
-        ordering: service?.ordering || 0,
-        published: service?.published || false,
-    };
+    let {
+      service = undefined,
+      form,
+    }: AdminServiceProps = $props()
 
-    const handelSubmit = async () => {
+    const sform = superForm(form, {
+        validators: zod4Client(adminServiceSchema),
+    });
+
+    const { form: formData, errors, validateForm } = sform;
+
+    const handelSubmit = async (event: Event) => {
+      event.preventDefault()
+      const validationResult = await validateForm()
+
+      if (!validationResult.valid ) {
+        errors.set(validationResult.errors)
+        toast.error("Ошибка в заполнении формы")
+        return
+      }
+      const payload: AdminServiceCreateModel = {
+          title: $formData.title,
+          price: $formData.price,
+          ordering: $formData.ordering,
+          published: $formData.published,
+      };
 
         if (!service) {
-            return await createServiceHandler();
+            return await createServiceHandler(payload);
         }
 
-        return await updateServiceHandler();
+        return await updateServiceHandler(payload);
     };
 
-    const createServiceHandler = async () => {
+    const createServiceHandler = async (payload: AdminServiceCreateModel) => {
         try {
             const res = await createService(fetch, $tokenStore, payload);
         } catch (error) {
-            addToast(String(error), "error");
+            toast.error(String(error));
             return;
         }
-        addToast("Успешно создано", "success");
+        toast.success("Успешно создано");
+        goto("/admin/service")
     };
 
-    const updateServiceHandler = async () => {
+    const updateServiceHandler = async (payload: AdminServiceCreateModel) => {
         if (!service?.id) {
-            addToast("Что-то пошло не так", "error");
+            toast.error("Что-то пошло не так");
         }
         try {
             const res = await updateService(
                 fetch,
                 $tokenStore,
+                // @ts-ignore
                 service?.id,
                 payload,
             );
         } catch (error) {
-            addToast(String(error), "error");
+            toast.error(String(error));
             return;
         }
-        addToast("Успешно создано", "success");
+        toast.success("Успешно создано");
     };
 
     const deleteServiceHandler = async () => {
         if (!service?.id) {
-            addToast("Что-то пошло не так", "error");
+          toast.error("Что-то пошло не так");
         }
         try {
             const res = await deleteService(
                 fetch,
                 $tokenStore,
+                // @ts-ignore
                 service?.id,
             );
         } catch (error) {
-            addToast(String(error), "error");
+          toast.error(String(error));
             return;
         }
-        addToast("Успешно создано", "success");
-        goto("/admin")
+        toast.success("Успешно удалено");
+        goto("/admin/service")
     }
 </script>
-
-<div class="p-5">
     <div class="flex justify-between items-center my-5">
         {#if service}<h2>Услуга - {service.id}</h2>
-        <Button onClick={deleteServiceHandler} label="Удалить" variant = "secondary"/>
-
+            <Button onclick={deleteServiceHandler} variant = "destructive">Удалить</Button>
         {:else}
             <h2>Создание услуги</h2>
         {/if}
     </div>
-    <!-- <h2 class="my-5">Контак</h2> -->
-    <form on:submit={handelSubmit}>
-        <div class="mb-4">
-            <label class="block mb-1" for="title">Заголовок</label>
-            <input
-                id="title"
-                name="title"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.title}
-            />
-        </div>
+    <form onsubmit={handelSubmit}>
+        <Form.Field form={sform} name="title">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Заголовок</Form.Label>
+                <Input {...attrs} bind:value={$formData.title} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="price">Цена</label>
-            <input
-                id="price"
-                name="price"
-                type="number"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.price}
-            />
-        </div>
+        <Form.Field form={sform} name="price">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Цена</Form.Label>
+                <Input {...attrs} type="number" bind:value={$formData.price} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="ordering">Сортировка</label>
-            <input
-                id="ordering"
-                name="ordering"
-                type="number"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.ordering}
-            />
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1" for="published">Опубликован</label>
-            <input
-                id="published"
-                name="published"
-                type="checkbox"
-                class="w-full border px-3 py-2 rounded"
-                bind:checked={payload.published}
-            />
-        </div>
-        <Button
-            label="{service ? 'Сохранить': 'Создать'}"
-            onClick={() => {}}
-            type="submit"
-            variant="secondary"
-        />
+        <Form.Field form={sform} name="ordering">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Сортировка</Form.Label>
+                <Input {...attrs} type="number" bind:value={$formData.ordering} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field form={sform} name="published">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Опубликовать</Form.Label>
+                <Switch {...attrs} bind:checked={$formData.published} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+        <Button type="submit">{service ? 'Сохранить': 'Создать'}</Button>
     </form>
-</div>

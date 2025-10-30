@@ -8,148 +8,160 @@
     import type {
         AdminContactCreateModel,
         AdminContactModel,
-    } from "@entities/contact/model/admin-contact";
+    } from "@entities/contact/model/types";
     import { tokenStore } from "@shared/stores/auth";
-    import Button from "@shared/ui/Button.svelte";
+    import * as Form from "@shared/ui/form/index"
+    import Button from "@shared/ui/button/button.svelte";
     import { addToast } from "@shared/ui/toast/store";
+    import { superForm, type SuperValidated } from "sveltekit-superforms";
+    import { adminContactSchema, type AdminContactSchema } from "@entities/contact/model/schema";
+    import { zod4Client, zodClient } from "sveltekit-superforms/adapters";
+    import Input from "@shared/ui/input/input.svelte";
+    import Switch from "@shared/ui/switch/switch.svelte";
+    import { toast } from "svelte-sonner";
 
-    export let contact: AdminContactModel | undefined = undefined;
+    interface AdminContactProps  {
+      contact?: AdminContactModel,
+      form: SuperValidated<AdminContactSchema>,
+    }
 
-    let payload: AdminContactCreateModel = {
-        title: contact?.title || "",
-        value: contact?.value || "",
-        href: contact?.href || "",
-        ordering: contact?.ordering || 0,
-        published: contact?.published || false,
-    };
+    let {
+      contact = undefined,
+      form,
+    }: AdminContactProps = $props()
 
-    const handelSubmit = async () => {
-        if (payload.href === "") {
-            payload.href = undefined;
-        }
+    const sform = superForm(form, {
+        validators: zod4Client(adminContactSchema),
+    });
 
-        if (!contact) {
-            return await createContactHandler();
-        }
+    const { form: formData, errors, validateForm } = sform;
 
-        return await updateContactHandler();
-    };
+    const onSubmit = async (event: Event) => {
+      event.preventDefault()
+      const validationResult = await validateForm()
 
-    const createContactHandler = async () => {
+      if (!validationResult.valid ) {
+        errors.set(validationResult.errors)
+        toast.error("Ошибка в заполнении формы")
+        return
+      }
+      const payload: AdminContactCreateModel = {
+          title: $formData.title,
+          value: $formData.value,
+          href: $formData.href || undefined,
+          ordering: $formData.ordering,
+          published: $formData.published,
+      };
+
+      if (!contact) {
+          await createContactHandler(payload);
+      } else {
+          await updateContactHandler(payload);
+      }
+    }
+
+    const createContactHandler = async (payload: AdminContactCreateModel) => {
         try {
-            const res = await createContact(fetch, $tokenStore, payload);
+            await createContact(fetch, $tokenStore, payload);
+            toast.success("Успешно создано");
+            goto("/admin/contact");
         } catch (error) {
-            addToast(String(error), "error");
-            return;
+            toast.error(String(error));
         }
-        addToast("Успешно создано", "success");
     };
 
-    const updateContactHandler = async () => {
+    const updateContactHandler = async (payload: AdminContactCreateModel) => {
         if (!contact?.id) {
-            addToast("Что-то пошло не так", "error");
-        }
-        try {
-            const res = await updateContact(
-                fetch,
-                $tokenStore,
-                contact?.id,
-                payload,
-            );
-        } catch (error) {
-            addToast(String(error), "error");
+            toast.error("Что-то пошло не так");
             return;
         }
-        addToast("Успешно создано", "success");
+        try {
+            await updateContact(fetch, $tokenStore, contact.id, payload);
+            toast.success("Успешно обновлено");
+        } catch (error) {
+          toast.error(String(error));
+        }
     };
 
     const deleteContactHandler = async () => {
         if (!contact?.id) {
-            addToast("Что-то пошло не так", "error");
-        }
-        try {
-            const res = await deleteContact(
-                fetch,
-                $tokenStore,
-                contact?.id,
-            );
-        } catch (error) {
-            addToast(String(error), "error");
+          toast.error("Что-то пошло не так");
             return;
         }
-        addToast("Успешно создано", "success");
-        goto("/admin")
+        try {
+            await deleteContact(fetch, $tokenStore, contact.id);
+            toast.error("Успешно удалено");
+            goto("/admin/contact");
+        } catch (error) {
+          toast.error(String(error));
+        }
     }
 </script>
 
-<div class="p-5">
+<div class="max-w-md">
     <div class="flex justify-between items-center my-5">
-        {#if contact}<h2>Контакт - {contact.id}</h2>
-        <Button onClick={deleteContactHandler} label="Удалить" variant = "secondary"/>
-
+        {#if contact}
+            <h2>Контакт - {contact.id}</h2>
+            <Button onclick={deleteContactHandler} variant="destructive">Удалить</Button>
         {:else}
             <h2>Создание контакта</h2>
         {/if}
     </div>
-    <!-- <h2 class="my-5">Контак</h2> -->
-    <form on:submit={handelSubmit}>
-        <div class="mb-4">
-            <label class="block mb-1" for="title">Заголовок</label>
-            <input
-                id="title"
-                name="title"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.title}
-            />
-        </div>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="value">Значение</label>
-            <input
-                id="value"
-                name="value"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.value}
-            />
-        </div>
+    <form onsubmit="{onSubmit}">
+        <Form.Field form={sform} name="title">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Заголовок</Form.Label>
+                <Input {...attrs} bind:value={$formData.title} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="href">Ссылка</label>
-            <input
-                id="href"
-                name="href"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.href}
-            />
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1" for="ordering">Сортировка</label>
-            <input
-                id="ordering"
-                name="ordering"
-                type="number"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.ordering}
-            />
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1" for="published">Опубликован</label>
-            <input
-                id="published"
-                name="published"
-                type="checkbox"
-                class="w-full border px-3 py-2 rounded"
-                bind:checked={payload.published}
-            />
-        </div>
+        <Form.Field form={sform} name="value">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Значение</Form.Label>
+                <Input {...attrs} bind:value={$formData.value} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field form={sform} name="href">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Ссылка</Form.Label>
+                <Input {...attrs} bind:value={$formData.href} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field form={sform} name="ordering">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Порядок</Form.Label>
+                <Input {...attrs} type="number" bind:value={$formData.ordering} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field form={sform} name="published">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Опубликовать</Form.Label>
+                <Switch {...attrs} bind:checked={$formData.published} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
         <Button
-            label="{contact ? 'Сохранить': 'Создать'}"
-            onClick={() => {}}
             type="submit"
-            variant="secondary"
-        />
+
+        >{contact ? 'Сохранить' : 'Создать'}</Button>
     </form>
 </div>

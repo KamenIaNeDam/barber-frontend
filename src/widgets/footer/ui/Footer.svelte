@@ -1,10 +1,10 @@
 <script lang="ts">
   import { menuItems } from "@entities/menu/model/menuItems";
-  // import { contacts } from "@entities/contact/model/contact";
+  // import { contacts } from "@entities/contact/model/types";
   import ContactCard from "@entities/contact/ui/contact-card.svelte";
   import { NAME } from "@shared/constants/title";
-    import type { SocialMediaModel } from "@entities/social-media/model/socia-media";
-    import type { ContactModel } from "@entities/contact/model/contact";
+    import type { SocialMediaModel } from "@entities/social-media/model/types";
+    import type { ContactModel } from "@entities/contact/model/types";
 
 
   export let socialMedias: SocialMediaModel[] = []

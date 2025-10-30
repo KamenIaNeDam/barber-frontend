@@ -1,5 +1,5 @@
 import { api } from "@shared/api/base";
-import type { SocialMediaModel } from "../model/socia-media";
+import type { SocialMediaModel } from "../model/types";
 
 const SOCIAL_MEDIA_API_PATH = "/api/social-media";
 

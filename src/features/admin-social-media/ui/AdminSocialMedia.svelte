@@ -8,134 +8,168 @@
     import type {
         AdminSocialMediaCreateModel,
         AdminSocialMediaModel,
-    } from "@entities/social-media/model/admin-social-media";
-    import { MediaType } from "@entities/social-media/model/socia-media";
+    } from "@entities/social-media/model/types";
+    import { adminSocialMediaSchema, type AdminSocialMediaSchema } from "@entities/social-media/model/schema";
+    import { MediaType } from "@entities/social-media/model/types";
     import { tokenStore } from "@shared/stores/auth";
-    import Button from "@shared/ui/Button.svelte";
-    import { addToast } from "@shared/ui/toast/store";
+    import { toast } from "svelte-sonner";
+    import { superForm, type SuperValidated } from "sveltekit-superforms";
+    import { zod4Client } from "sveltekit-superforms/adapters";
+    import Button from "@shared/ui/button/button.svelte";
+    import * as Form from "@shared/ui/form/index"
+    import * as Select from "@shared/ui/select/index"
+    import Input from "@shared/ui/input/input.svelte";
+    import Switch from "@shared/ui/switch/switch.svelte";
 
-    export let contact: AdminSocialMediaModel | undefined = undefined;
+    interface AdminSocialMediaProps {
+      socialMedia?: AdminSocialMediaModel,
+      form: SuperValidated<AdminSocialMediaSchema>
+    }
 
-    let payload: AdminSocialMediaCreateModel = {
-        url: contact?.url || "",
-        type: contact?.type || MediaType.VK,
-        ordering: contact?.ordering || 0,
-        published: contact?.published || false,
-    };
+    let {
+      socialMedia = undefined,
+      form,
+    }: AdminSocialMediaProps = $props()
 
-    const handelSubmit = async () => {
-        if (!contact) {
-            return await createSocialMediaHandler();
+    const sform = superForm(form, {
+        validators: zod4Client(adminSocialMediaSchema),
+    });
+
+    const { form: formData, errors, validateForm } = sform;
+
+    const handelSubmit = async (event: Event) => {
+      event.preventDefault()
+      const validationResult = await validateForm()
+
+      if (!validationResult.valid ) {
+        errors.set(validationResult.errors)
+        toast.error("Ошибка в заполнении формы")
+        return
+      }
+      const payload: AdminSocialMediaCreateModel = {
+          url: $formData.url,
+          type: $formData.type,
+          ordering: $formData.ordering,
+          published: $formData.published,
+      };
+
+        if (!socialMedia) {
+            return await createSocialMediaHandler(payload);
         }
 
-        return await updateSocialMediaHandler();
+        return await updateServiceHandler(payload);
     };
 
-    const createSocialMediaHandler = async () => {
+    const createSocialMediaHandler = async (payload: AdminSocialMediaCreateModel) => {
         try {
             const res = await createSocialMedia(fetch, $tokenStore, payload);
         } catch (error) {
-            addToast(String(error), "error");
+            toast.error(String(error));
             return;
         }
-        addToast("Успешно создано", "success");
+        toast.success("Успешно создано");
+        goto("/admin/social-media")
     };
 
-    const updateSocialMediaHandler = async () => {
-        if (!contact?.id) {
-            addToast("Что-то пошло не так", "error");
+    const updateServiceHandler = async (payload: AdminSocialMediaCreateModel) => {
+        if (!socialMedia?.id) {
+            toast.error("Что-то пошло не так");
         }
         try {
             const res = await updateSocialMedia(
                 fetch,
                 $tokenStore,
-                contact?.id,
+                socialMedia?.id,
                 payload,
             );
         } catch (error) {
-            addToast(String(error), "error");
+            toast.error(String(error));
             return;
         }
-        addToast("Успешно создано", "success");
+        toast.success("Успешно создано");
     };
 
     const deleteSocialMediaHandler = async () => {
-        if (!contact?.id) {
-            addToast("Что-то пошло не так", "error");
+        if (!socialMedia?.id) {
+          toast.error("Что-то пошло не так");
         }
         try {
             const res = await deleteSocialMedia(
                 fetch,
                 $tokenStore,
-                contact?.id,
+                socialMedia?.id,
             );
         } catch (error) {
-            addToast(String(error), "error");
+          toast.error(String(error));
             return;
         }
-        addToast("Успешно создано", "success");
-        goto("/admin");
-    };
+        toast.success("Успешно удалено");
+        goto("/admin/social-media")
+    }
 </script>
 
-<div class="p-5">
     <div class="flex justify-between items-center my-5">
-        {#if contact}<h2>Сиц. сеть - {contact.id}</h2>
-            <Button
+        {#if socialMedia}<h2>Сиц. сеть - {socialMedia.id}</h2>
+            <!-- <Button
                 onClick={deleteSocialMediaHandler}
                 label="Удалить"
                 variant="secondary"
-            />
+            /> -->
+            <Button onclick={deleteSocialMediaHandler} variant="destructive">Удалить</Button>
         {:else}
             <h2>Создание соц. сети</h2>
         {/if}
     </div>
-    <!-- <h2 class="my-5">Контак</h2> -->
-    <form on:submit={handelSubmit}>
-        <div class="mb-4">
-            <label class="block mb-1" for="title">Ссылка</label>
-            <input
-                id="title"
-                name="title"
-                type="text"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.url}
-            />
-        </div>
+    <form onsubmit={handelSubmit}>
+        <Form.Field form={sform} name="url">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Ссылка</Form.Label>
+                <Input {...attrs} bind:value={$formData.url} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
 
-        <div class="mb-4">
-            <label class="block mb-1" for="type">Тип</label>
-            <select id="type" name="type" bind:value={payload.type}>
-                {#each Object.entries(MediaType) as [k,v]}
-                    <option value="{v}">{k}</option>
-                {/each}
-            </select>
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1" for="ordering">Сортировка</label>
-            <input
-                id="ordering"
-                name="ordering"
-                type="number"
-                class="w-full border px-3 py-2 rounded"
-                bind:value={payload.ordering}
-            />
-        </div>
-        <div class="mb-4">
-            <label class="block mb-1" for="published">Опубликован</label>
-            <input
-                id="published"
-                name="published"
-                type="checkbox"
-                class="w-full border px-3 py-2 rounded"
-                bind:checked={payload.published}
-            />
-        </div>
-        <Button
-            label={contact ? "Сохранить" : "Создать"}
-            onClick={() => {}}
-            type="submit"
-            variant="secondary"
-        />
+        <Form.Field form={sform} name="type">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Тип</Form.Label>
+                <Select.Root type="single" {...attrs} bind:value={$formData.type} name="type">
+                  <Select.Trigger class="w-full bg-(--background)">
+                      {$formData.type
+                      ? $formData.type
+                                    : "Выберите соц.сеть"}
+                  </Select.Trigger>
+                  <Select.Content>
+                      {#each Object.entries(MediaType) as [k,v]}
+                          <Select.Item value={v}>{k}</Select.Item>
+                      {/each}
+                  </Select.Content>
+                </Select.Root>
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field form={sform} name="ordering">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Сортировка</Form.Label>
+                <Input {...attrs} type="number" bind:value={$formData.ordering} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+
+        <Form.Field form={sform} name="published">
+            <Form.Control>
+                {#snippet children(attrs)}
+                <Form.Label>Опубликовать</Form.Label>
+                <Switch {...attrs} bind:checked={$formData.published} />
+                {/snippet}
+            </Form.Control>
+            <Form.FieldErrors />
+        </Form.Field>
+        <Button type="submit">{socialMedia ? 'Сохранить': 'Создать'}</Button>
     </form>
-</div>
