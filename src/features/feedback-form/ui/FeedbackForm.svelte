@@ -133,9 +133,9 @@
     <Form.Field form={sform} name="assigned">
         <Form.Control>
             {#snippet children(attrs)}
-                <div class="flex size-[1.4] gap-4">
+                <div class="flex items-start gap-4">
                 <Checkbox class="w-[24px] h-[24px]" {...attrs} bind:checked={$formData.assigned} />
-                <span class="text-[#858687] p-0 m-0 text-sm/tight">
+                <span class="text-[#858687] text-sm/tight">
                     <a class="underline" href="/consent.pdf" target="_blank" rel="noopener noreferrer">Согласен на обработку персональных данных</a> в соответствии с <a class="underline" href="/policy.pdf" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a>
                 </span>
                 </div>
