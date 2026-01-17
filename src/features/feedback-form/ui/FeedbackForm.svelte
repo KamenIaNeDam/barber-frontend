@@ -11,6 +11,7 @@
     import Textarea from "@shared/ui/textarea/textarea.svelte";
     import { toast } from "svelte-sonner";
     import Button from "@shared/ui/Button.svelte";
+    import Checkbox from "@shared/ui/checkbox/checkbox.svelte";
 
     interface FeedbackFormProps {
       form: SuperValidated<FeedbackSchema>
@@ -127,6 +128,21 @@
             {/snippet}
         </Form.Control>
         <Form.FieldErrors />
+    </Form.Field>
+
+    <Form.Field form={sform} name="assigned">
+        <Form.Control>
+            {#snippet children(attrs)}
+                <div class="flex size-[1.4] gap-4">
+                <Checkbox class="w-[24px] h-[24px]" {...attrs} bind:checked={$formData.assigned} />
+                <span class="text-[#858687] p-0 m-0 text-sm/tight">
+                    <a class="underline" href="/consent.pdf" target="_blank" rel="noopener noreferrer">Согласен на обработку персональных данных</a> в соответствии с <a class="underline" href="/policy.pdf" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a>
+                </span>
+                </div>
+            {/snippet}
+        </Form.Control>
+        <Form.FieldErrors />
+
     </Form.Field>
 
 
